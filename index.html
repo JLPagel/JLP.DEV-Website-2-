@@ -1488,28 +1488,35 @@
 
 		<script>
   function handleSubmit(event) {
-    event.preventDefault(); // Prevent default form submission
-    const form = event.target;
-    const data = new FormData(form);
-    
-    fetch("https://script.google.com/macros/s/AKfycbyEE42YUdNMLGyCWLgrHvg9alE1FDGoU5aI1a3vGtBKLpBoOqaSEtNLJ2kmoyXR9A6pBw/exec", {
-      method: "POST",
-      body: data
-    })
-    .then(response => {
-      if (response.ok) {
-        document.getElementById("formContainer").style.display = "none";
-        document.getElementById("thankYouMessage").style.display = "block";
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    })
-    .catch(error => {
-      console.error("Error!", error.message);
-      alert("Submission failed. Please try again.");
-    });
-  }
-</script>
+  event.preventDefault();
+  const form = event.target;
+  const data = new FormData(form);
+  
+  console.log("Form submitted!");
+  console.log("Form data:", Object.fromEntries(data));
+  
+  fetch("https://script.google.com/macros/s/AKfycbyEE42YUdNMLGyCWLgrHvg9alE1FDGoU5aI1a3vGtBKLpBoOqaSEtNLJ2kmoyXR9A6pBw/exec", {
+    method: "POST",
+    body: data
+  })
+  .then(response => {
+    console.log("Response received:", response.status);
+    return response.text();
+  })
+  .then(text => {
+    console.log("Response text:", text);
+    if (text.includes("Success")) {
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("thankYouMessage").style.display = "block";
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  })
+  .catch(error => {
+    console.error("Error!", error);
+    alert("Submission failed: " + error.message);
+  });
+}
 
         <!-- Payment Info at Bottom -->
         <div class="payment-info">
@@ -1610,6 +1617,7 @@
 </body>
 
 </html>
+
 
 
 
