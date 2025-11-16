@@ -1,4 +1,4 @@
-# JLP Development Portfolio Site
+# JLP Development MAIN PAGE
 
 Welcome to the official portfolio of Jennifer Pagel — a purpose-driven junior full stack developer, business coach, and digital solutions provider. This site showcases her hands-on approach to building impactful web experiences for small businesses and startups.
 
