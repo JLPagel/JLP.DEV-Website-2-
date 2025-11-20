@@ -1947,6 +1947,32 @@ function handleSubmit(event) {
     alert("Submission failed: " + error.message);
   });
 }
+
+		function openModal() {
+            document.getElementById('whyMeModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            document.getElementById('whyMeModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        // Close modal when clicking outside the content box
+        function closeModalOnOverlay(event) {
+            if (event.target.id === 'whyMeModal') {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+		
     </script>
 
 		 <!-- Modal (Hidden by default) -->
@@ -2035,6 +2061,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
