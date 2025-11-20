@@ -1504,39 +1504,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="spotlight"></div>
 
     <nav>
-        <div class="nav-container">
-            <div class="logo">JLP.DEV</div>
-            <div class="nav-menu">
-                <div class="nav-item">
-                    <span class="nav-link" onclick="toggleServicesDropdown()">Services ▾</span>
-                    <div class="services-dropdown" id="servicesDropdown">
-                        <a href="#service-1" onclick="smoothScroll(event, 'service-1'); toggleServicesDropdown()">Landing Page</a>
-                        <a href="#service-2" onclick="smoothScroll(event, 'service-2'); toggleServicesDropdown()">Multi-Page Website</a>
-                        <a href="#service-3" onclick="smoothScroll(event, 'service-3'); toggleServicesDropdown()">Web Application</a>
-                        <a href="#service-4" onclick="smoothScroll(event, 'service-4'); toggleServicesDropdown()">Website Fixes & Updates</a>
-                        <a href="#service-5" onclick="smoothScroll(event, 'service-5'); toggleServicesDropdown()">E-Commerce Store</a>
-                        <a href="#service-6" onclick="smoothScroll(event, 'service-6'); toggleServicesDropdown()">Website Consultation</a>
-                    </div>
+    <div class="nav-container">
+        <div class="logo">JLP.DEV</div>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <span class="nav-link" onclick="toggleServicesDropdown()">Services ▾</span>
+                <div class="services-dropdown" id="servicesDropdown">
+                    <a href="#service-1" onclick="smoothScroll(event, 'service-1'); toggleServicesDropdown()">Landing Page</a>
+                    <a href="#service-2" onclick="smoothScroll(event, 'service-2'); toggleServicesDropdown()">Multi-Page Website</a>
+                    <a href="#service-3" onclick="smoothScroll(event, 'service-3'); toggleServicesDropdown()">Web Application</a>
+                    <a href="#service-4" onclick="smoothScroll(event, 'service-4'); toggleServicesDropdown()">Website Fixes & Updates</a>
+                    <a href="#service-5" onclick="smoothScroll(event, 'service-5'); toggleServicesDropdown()">E-Commerce Store</a>
+                    <a href="#service-6" onclick="smoothScroll(event, 'service-6'); toggleServicesDropdown()">Website Consultation</a>
                 </div>
-                <a href="#about" class="nav-link" onclick="smoothScroll(event, 'about')">About</a>
-                <a href="#pricing" class="nav-link" onclick="smoothScroll(event, 'pricing')">Pricing</a>
-                <a href="#contactForm" class="nav-link" onclick="smoothScroll(event, 'contactForm')">Contact</a>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-            <div class="contact-dropdown">
-                <button class="contact-btn" onclick="toggleDropdown()">Let's Talk</button>
-                <div class="dropdown-content" id="dropdownMenu">
-                    <h3>📧 Consultation Options</h3>
-                    <p><strong>15 minutes FREE</strong> - Quick project discussion</p>
-                    <p><strong>Full Hour ($20)</strong> - In-depth consultation (payment due upfront)</p>
-                    <p style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1);">Email me directly:</p>
-                    <a href="mailto:Jlpagel.midwest@gmail.com" class="email-link">Jlpagel.midwest@gmail.com</a>
-                    <p style="margin-top: 12px; font-size: 13px;">Or fill out the contact form below and I'll get back to you within 24 hours!</p>
-                </div>
+            <a href="#about" class="nav-link" onclick="smoothScroll(event, 'about')">About</a>
+            <a href="#pricing" class="nav-link" onclick="smoothScroll(event, 'pricing')">Pricing</a>
+            <a href="#contactForm" class="nav-link" onclick="smoothScroll(event, 'contactForm')">Contact</a>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <div class="contact-dropdown">
+            <button class="contact-btn" onclick="toggleDropdown()">Let's Talk</button>
+            <div class="dropdown-content" id="dropdownMenu">
+                <h3>📧 Consultation Options</h3>
+                
+                <!-- Calendly Links -->
+                <a href="https://calendly.com/yourname/15min" target="_blank" class="calendly-link">
+                    <strong>📅 Book 15-Min FREE Call</strong>
+                    <span style="font-size: 13px; display: block; margin-top: 4px;">Quick project discussion</span>
+                </a>
+                
+                <a href="https://calendly.com/yourname/60min" target="_blank" class="calendly-link">
+                    <strong>📅 Book 1-Hour Call ($20)</strong>
+                    <span style="font-size: 13px; display: block; margin-top: 4px;">In-depth consultation</span>
+                </a>
+                
+                <p style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1);">Or email me directly:</p>
+                <a href="mailto:Jlpagel.midwest@gmail.com" class="email-link">Jlpagel.midwest@gmail.com</a>
             </div>
         </div>
-    </nav>
-
+    </div>
+</nav>
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-section">
             <div class="mobile-menu-title">Services</div>
@@ -2061,6 +2069,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
