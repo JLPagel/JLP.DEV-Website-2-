@@ -578,39 +578,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             text-transform: uppercase;
         }
 
-        /* Portfolio Note */
-        .portfolio-note {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(236, 72, 153, 0.1));
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            border-radius: 32px;
-            padding: 60px;
-            margin: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
+/* Portfolio Note (Disclaimer Style) */
+.portfolio-note {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(236, 72, 153, 0.05));
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 16px;          /* smaller radius for subtlety */
+    padding: 20px;                /* reduced padding */
+    margin: 40px 0;               /* less vertical space */
+    position: relative;
+    overflow: hidden;
+    font-size: 0.9em;             /* overall smaller text scale */
+}
 
-        .portfolio-note::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #a855f7, #ec4899, transparent);
-        }
+.portfolio-note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;                  /* thinner line */
+    background: linear-gradient(90deg, transparent, #a855f7, #ec4899, transparent);
+}
 
-        .portfolio-note h3 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
+.portfolio-note h3 {
+    font-size: 18px;              /* smaller heading */
+    margin-bottom: 10px;
+    font-weight: 600;             /* lighter weight */
+    letter-spacing: -0.5px;
+}
 
-        .portfolio-note p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 2;
-            font-size: 18px;
-        }
+.portfolio-note p {
+    color: rgba(255, 255, 255, 0.6); /* softer text color */
+    line-height: 1.6;                /* tighter line spacing */
+    font-size: 14px;                 /* smaller paragraph text */
+}
 
         /* Payment Info Box */
         .payment-info {
@@ -2298,6 +2299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
