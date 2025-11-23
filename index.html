@@ -695,6 +695,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background: linear-gradient(90deg, transparent, #a855f7, #ec4899, transparent);
         }
 
+		/* iMac G3 Color Sparkles behind About Section - ADD THIS */
+.about-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(circle 40px at 15% 20%, rgba(91, 206, 250, 0.4), transparent),
+        radial-gradient(circle 50px at 85% 30%, rgba(245, 166, 35, 0.35), transparent),
+        radial-gradient(circle 45px at 25% 70%, rgba(118, 215, 196, 0.4), transparent),
+        radial-gradient(circle 55px at 70% 80%, rgba(126, 214, 223, 0.35), transparent),
+        radial-gradient(circle 35px at 50% 40%, rgba(162, 155, 254, 0.4), transparent),
+        radial-gradient(circle 48px at 90% 70%, rgba(255, 118, 117, 0.35), transparent),
+        radial-gradient(circle 42px at 10% 85%, rgba(253, 203, 110, 0.4), transparent),
+        radial-gradient(circle 38px at 60% 15%, rgba(129, 236, 236, 0.35), transparent);
+    animation: g3Sparkle 25s ease-in-out infinite;
+}
+
+@keyframes g3Sparkle {
+    0%, 100% { 
+        opacity: 0.6;
+        transform: scale(1) rotate(0deg);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+    }
+}
+
         .about-content {
             display: grid;
             grid-template-columns: 200px 1fr;
@@ -2244,6 +2277,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
