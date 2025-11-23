@@ -1657,11 +1657,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .expand-indicator {
     text-align: center;
-    padding: 10px 0 5px 0;
+    padding: 15px 0 0 0;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     font-size: 13px;
-    margin-top: 5px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.expand-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: rgba(168, 85, 247, 0.5);
 }
 
 .service-card.expanded .expand-indicator::after {
@@ -2298,6 +2310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
