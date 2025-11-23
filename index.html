@@ -1735,6 +1735,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size: 32px;
 }
 
+		/* Fireworks Canvas */
+.fireworks-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+}
+
+.fireworks-canvas.active {
+    display: block;
+}
+
+/* Celebration overlay */
+.celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.celebration-overlay.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 		
 		
     </style>
@@ -2216,8 +2254,8 @@ function handleSubmit(event) {
   .then(text => {
     console.log("Response text:", text);
     if (text.includes("Success")) {
-      document.getElementById("formContainer").style.display = "none";
-      document.getElementById("thankYouMessage").style.display = "block";
+      // Trigger celebration!
+      triggerCelebration();
     } else {
       alert("Something went wrong. Please try again.");
     }
@@ -2228,6 +2266,175 @@ function handleSubmit(event) {
   });
 }
 
+// Celebration function with fireworks and sound
+function triggerCelebration() {
+  // Show overlay
+  const overlay = document.getElementById('celebrationOverlay');
+  overlay.classList.add('active');
+  
+  // Play success sound
+  playSuccessSound();
+  
+  // Start fireworks
+  startFireworks();
+  
+  // After 3 seconds, show thank you message
+  setTimeout(() => {
+    overlay.classList.remove('active');
+    document.getElementById("formContainer").style.display = "none";
+    document.getElementById("thankYouMessage").style.display = "block";
+    
+    // Scroll to thank you message
+    document.getElementById("thankYouMessage").scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'center'
+    });
+  }, 3000);
+}
+
+// Create success sound using Web Audio API
+function playSuccessSound() {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  
+  // Play a pleasant "ding" sound
+  const playNote = (frequency, startTime, duration) => {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = frequency;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.3, startTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+    
+    oscillator.start(startTime);
+    oscillator.stop(startTime + duration);
+  };
+  
+  // Play a cheerful chord progression
+  const now = audioContext.currentTime;
+  playNote(523.25, now, 0.3); // C5
+  playNote(659.25, now + 0.1, 0.3); // E5
+  playNote(783.99, now + 0.2, 0.4); // G5
+  playNote(1046.50, now + 0.3, 0.5); // C6
+}
+
+// Fireworks animation
+function startFireworks() {
+  const canvas = document.getElementById('fireworksCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.classList.add('active');
+  
+  // Set canvas size
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // iMac G3 colors
+  const colors = [
+    '#5BCEFA', // Bondi Blue
+    '#F5A623', // Tangerine
+    '#76D7C4', // Lime/Teal
+    '#7ED6DF', // Blueberry
+    '#A29BFE', // Grape
+    '#FF7675', // Strawberry
+    '#FDCB6E', // Tangerine
+    '#81ECEC'  // Lime
+  ];
+  
+  class Particle {
+    constructor(x, y, color) {
+      this.x = x;
+      this.y = y;
+      this.color = color;
+      this.velocity = {
+        x: (Math.random() - 0.5) * 8,
+        y: (Math.random() - 0.5) * 8
+      };
+      this.alpha = 1;
+      this.decay = Math.random() * 0.015 + 0.015;
+      this.size = Math.random() * 3 + 2;
+    }
+    
+    update() {
+      this.velocity.y += 0.1; // gravity
+      this.x += this.velocity.x;
+      this.y += this.velocity.y;
+      this.alpha -= this.decay;
+    }
+    
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Add glow
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = this.color;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+  
+  let particles = [];
+  let fireworkCount = 0;
+  const maxFireworks = 8;
+  
+  function createFirework() {
+    if (fireworkCount >= maxFireworks) return;
+    
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height * 0.5 + canvas.height * 0.1;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    // Create burst of particles
+    for (let i = 0; i < 50; i++) {
+      particles.push(new Particle(x, y, color));
+    }
+    
+    fireworkCount++;
+  }
+  
+  function animate() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Update and draw particles
+    particles = particles.filter(particle => {
+      particle.update();
+      particle.draw();
+      return particle.alpha > 0;
+    });
+    
+    if (fireworkCount < maxFireworks) {
+      if (Math.random() < 0.1) {
+        createFirework();
+      }
+      requestAnimationFrame(animate);
+    } else if (particles.length > 0) {
+      requestAnimationFrame(animate);
+    } else {
+      canvas.classList.remove('active');
+    }
+  }
+  
+  // Start first firework immediately
+  createFirework();
+  animate();
+  
+  // Create more fireworks over time
+  const interval = setInterval(() => {
+    createFirework();
+    if (fireworkCount >= maxFireworks) {
+      clearInterval(interval);
+    }
+  }, 200);
+}
 		function openModal() {
             document.getElementById('whyMeModal').classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -2355,6 +2562,9 @@ document.querySelectorAll('.cta-button').forEach(btn => {
         </div>
     </div>
 
+		<!-- Fireworks Canvas -->
+<div class="celebration-overlay" id="celebrationOverlay"></div>
+<canvas class="fireworks-canvas" id="fireworksCanvas"></canvas>
 		
 </body>
 	<!-- Google Tag Manager (noscript) -->
@@ -2363,6 +2573,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
