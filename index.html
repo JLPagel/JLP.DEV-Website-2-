@@ -2651,12 +2651,11 @@ document.querySelectorAll('.cta-button').forEach(btn => {
   const { useState, useEffect } = React;
 
   const AnimatedGuide = () => {
-    // UPDATE THIS URL TO YOUR IMAGE PATH
     const imageUrl = "https://jlpagel.github.io/SpeechBubblePhoto.png";
     
     const [isAnimating, setIsAnimating] = useState(false);
     const [step, setStep] = useState(0);
-    const [position, setPosition] = useState({ x: 5, y: 5 });
+    const [position, setPosition] = useState({ x: 8, y: 8 });
     const [showFireworks, setShowFireworks] = useState(false);
 
     const dialogue = [
@@ -2668,11 +2667,11 @@ document.querySelectorAll('.cta-button').forEach(btn => {
     ];
 
     const animationSteps = [
-      { x: 50, y: 15, duration: 3000, scroll: 0 }, // Hero section
-      { x: 50, y: 40, duration: 2500, scroll: 800 }, // About section
-      { x: 50, y: 65, duration: 2500, scroll: 1600 }, // Free consultation
-      { x: 50, y: 80, duration: 2500, scroll: 2400 }, // Contact form
-      { x: 50, y: 5, duration: 2000, scroll: 0 }, // Fly to top
+      { x: 50, y: 15, duration: 4000, scroll: 0 }, // Hero section - stay longer
+      { x: 50, y: 35, duration: 3500, scroll: 1200 }, // About section
+      { x: 50, y: 60, duration: 3500, scroll: 2800 }, // Free consultation
+      { x: 50, y: 85, duration: 3500, scroll: 4500 }, // Contact form - scroll further down
+      { x: 50, y: 5, duration: 2000, scroll: 0 }, // Fly back to top
     ];
 
     useEffect(() => {
@@ -2702,7 +2701,7 @@ document.querySelectorAll('.cta-button').forEach(btn => {
             setShowFireworks(false);
             setIsAnimating(false);
             setStep(0);
-            setPosition({ x: 5, y: 5 });
+            setPosition({ x: 8, y: 8 });
           }, 2000);
         }, 1500);
       }
@@ -2815,7 +2814,7 @@ document.querySelectorAll('.cta-button').forEach(btn => {
               left: '50%',
               transform: 'translateX(-50%)',
               marginBottom: '20px',
-              width: '250px',
+              width: '320px',
               zIndex: 10001
             }
           },
@@ -2861,7 +2860,7 @@ document.querySelectorAll('.cta-button').forEach(btn => {
               src: imageUrl,
               alt: 'Jennifer - Your Guide',
               style: {
-                width: '150px',
+                width: '220px',
                 height: 'auto',
                 display: 'block',
                 filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
@@ -2922,6 +2921,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
