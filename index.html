@@ -2706,7 +2706,7 @@ const AnimatedGuide = () => {
         const mobile = window.innerWidth <= 768;
         setIsMobile(mobile);
         if (!isAnimating) {
-          setPosition(mobile ? { x: 8, y: 15 } : { x: 8, y: 25 });
+          setPosition(ismobile ? { x: 8, y: 15 } : { x: 8, y: 25 });
         }
       };
       window.addEventListener('resize', handleResize);
@@ -2853,7 +2853,7 @@ const AnimatedGuide = () => {
               left: '50%',
               transform: 'translateX(-50%)',
               marginBottom: '20px',
-              width: '400px',
+              width: isMobile ? '280px' : '400px',
               zIndex: 10001
             }
           },
@@ -2871,7 +2871,7 @@ const AnimatedGuide = () => {
                 style: {
                   margin: 0,
                   textAlign: 'center',
-                  fontSize: '16px',
+                  fontSize: isMobile ? '14px' : '16px',
                   fontWeight: '600',
                   color: '#333',
                   lineHeight: '1.4'
@@ -2899,7 +2899,7 @@ const AnimatedGuide = () => {
               src: imageUrl,
               alt: 'Jennifer - Your Guide',
               style: {
-                width: '280px',
+                width: isMobile ? '180px' : '280px',
                 height: 'auto',
                 display: 'block',
                 filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
@@ -2960,6 +2960,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
