@@ -2669,8 +2669,11 @@ const AnimatedGuide = () => {
     
     const [isAnimating, setIsAnimating] = useState(false);
     const [step, setStep] = useState(0);
-    const [position, setPosition] = useState({ x: 8, y: 25 });
     const [showFireworks, setShowFireworks] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    
+    const startPos = isMobile ? { x: 8, y: 15 } : { x: 8, y: 25 };
+    const [position, setPosition] = useState(startPos);
 
     const dialogue = [
       "Hi there! Welcome to my page. Feel free to look around",
@@ -2680,13 +2683,35 @@ const AnimatedGuide = () => {
       "and book my calendar directly"
     ];
 
-const animationSteps = [
+    const desktopSteps = [
       { x: 50, y: 25, duration: 4000, scroll: 0 },
       { x: 50, y: 35, duration: 3700, scroll: 1200 },
       { x: 50, y: 60, duration: 4200, scroll: 2800 },
       { x: 50, y: 70, duration: 3500, scroll: 4500 },
       { x: 50, y: 25, duration: 2500, scroll: 0 },
     ];
+
+    const mobileSteps = [
+      { x: 50, y: 15, duration: 4000, scroll: 0 },
+      { x: 50, y: 30, duration: 3700, scroll: 800 },
+      { x: 50, y: 50, duration: 4200, scroll: 2200 },
+      { x: 50, y: 65, duration: 3500, scroll: 3800 },
+      { x: 50, y: 15, duration: 2500, scroll: 0 },
+    ];
+
+    const animationSteps = isMobile ? mobileSteps : desktopSteps;
+
+    useEffect(() => {
+      const handleResize = () => {
+        const mobile = window.innerWidth <= 768;
+        setIsMobile(mobile);
+        if (!isAnimating) {
+          setPosition(mobile ? { x: 8, y: 15 } : { x: 8, y: 25 });
+        }
+      };
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, [isAnimating]);
 
     useEffect(() => {
       if (!isAnimating) return;
@@ -2695,7 +2720,6 @@ const animationSteps = [
         const currentStep = animationSteps[step];
         setPosition({ x: currentStep.x, y: currentStep.y });
         
-        // Smooth scroll to section
         window.scrollTo({
           top: currentStep.scroll,
           behavior: 'smooth'
@@ -2707,7 +2731,6 @@ const animationSteps = [
 
         return () => clearTimeout(timer);
       } else if (step === animationSteps.length) {
-        // Walk off screen
         setPosition({ x: 110, y: 5 });
         setTimeout(() => {
           setShowFireworks(true);
@@ -2715,7 +2738,7 @@ const animationSteps = [
             setShowFireworks(false);
             setIsAnimating(false);
             setStep(0);
-            setPosition({ x: 8, y: 25 });
+            setPosition(isMobile ? { x: 8, y: 15 } : { x: 8, y: 25 });
           }, 2000);
         }, 1500);
       }
@@ -2778,7 +2801,6 @@ const animationSteps = [
         zIndex: 9999
       }
     },
-      // Style tag
       React.createElement('style', {
         dangerouslySetInnerHTML: {
           __html: `
@@ -2800,7 +2822,6 @@ const animationSteps = [
         }
       }),
       
-      // Animated Guide Character
       React.createElement('div', {
         style: {
           position: 'absolute',
@@ -2820,7 +2841,6 @@ const animationSteps = [
             animation: isAnimating ? 'none' : 'float 3s ease-in-out infinite'
           }
         },
-          // Speech Bubble
           isAnimating && step < dialogue.length && React.createElement('div', {
             style: {
               position: 'absolute',
@@ -2868,7 +2888,6 @@ const animationSteps = [
             )
           ),
           
-          // Image
           imageUrl ? 
             React.createElement('img', {
               src: imageUrl,
@@ -2902,7 +2921,6 @@ const animationSteps = [
         )
       ),
       
-      // Fireworks
       showFireworks && React.createElement('div', {
         style: {
           position: 'absolute',
@@ -2935,6 +2953,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
