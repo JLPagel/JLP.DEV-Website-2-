@@ -2828,10 +2828,7 @@ const AnimatedGuide = () => {
           left: `${position.x}%`,
           top: `${position.y}%`,
           transform: 'translate(-50%, -50%)',
-          transition: isAnimating 
-  ? `all ${animationSteps[step]?.duration / 1000}s ease-in-out`
-  : 'all 3s ease-in-out',
-
+          transition: 'all 2s ease-in-out',
           cursor: 'pointer',
           pointerEvents: 'auto',
           zIndex: 10000
@@ -2956,6 +2953,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 </html>
+
 
 
 
