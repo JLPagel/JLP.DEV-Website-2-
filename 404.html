@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Under Construction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Animated gradient overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(102, 126, 234, 0.3) 0%, 
+                rgba(118, 75, 162, 0.3) 25%,
+                rgba(255, 107, 53, 0.2) 50%,
+                rgba(0, 255, 0, 0.2) 75%,
+                rgba(59, 130, 246, 0.3) 100%
+            );
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .error-code {
+            font-size: 10rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: 5px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-message {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .apology-text {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 2rem 0 3rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Self-destruct warning */
+        .self-destruct-warning {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #ff6b35;
+            padding: 1.5rem 2.5rem;
+            border-radius: 15px;
+            z-index: 2000;
+            animation: warningPulse 1s infinite;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.02);
+                box-shadow: 0 15px 50px rgba(255, 107, 53, 0.6);
+            }
+        }
+
+        .warning-text {
+            color: #764ba2;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .countdown-timer {
+            font-size: 3rem;
+            color: #ff6b35;
+            font-weight: 800;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bomb-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .bomb-icon {
+            font-size: 4rem;
+            animation: bombShake 0.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes bombShake {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-5deg) scale(1.05); }
+            50% { transform: rotate(5deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+        }
+
+        .loading-bar {
+            width: 100%;
+            max-width: 500px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-fill {
+            height: 100%;
+            width: 60%;
+            background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+            border-radius: 10px;
+            animation: loading 2s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0%, 100% { width: 60%; }
+            50% { width: 80%; }
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Mascot rescue */
+        .mascot-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 20000;
+            opacity: 0;
+            width: 400px;
+            height: 400px;
+        }
+
+        .mascot-container.rescue {
+            animation: rescueAppear 0.5s ease-out forwards;
+        }
+
+        @keyframes rescueAppear {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            60% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .mascot-placeholder {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.8));
+        }
+
+        .mascot-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .message-bubble {
+            position: absolute;
+            top: -80px;
+            right: -140px;
+            background: #ffffff;
+            color: #667eea;
+            padding: 1.5rem 2rem;
+            border-radius: 25px;
+            border: 4px solid #667eea;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            max-width: 250px;
+            text-align: center;
+            animation: bubblePop 0.5s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .message-bubble.show {
+            opacity: 1;
+        }
+
+        @keyframes bubblePop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            80% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .rescue-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        /* Explosion effect */
+        .explosion {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ff6b35 0%, #764ba2 20%, transparent 70%);
+            z-index: 10000;
+            pointer-events: none;
+            opacity: 0;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(4);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            .main-message {
+                font-size: 2rem;
+            }
+            .apology-text {
+                font-size: 1.1rem;
+            }
+            .message-bubble {
+                position: static;
+                margin: 1rem auto;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            .self-destruct-warning {
+                padding: 1rem 1.5rem;
+            }
+            .warning-text {
+                font-size: 1rem;
+            }
+            .countdown-timer {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <script>
+        // Create floating particles
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(particle);
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <!-- Self-Destruct Warning -->
+    <div class="self-destruct-warning" id="selfDestruct">
+        <div class="warning-text">⚠️ AUTO-REDIRECT IN... ⚠️</div>
+        <div class="bomb-container">
+            <div class="bomb-icon">💣</div>
+        </div>
+        <div class="countdown-timer" id="countdown">10</div>
+        <div class="warning-text" style="font-size: 0.9rem; margin-top: 0.5rem;">CHOOSE YOUR PATH!</div>
+    </div>
+
+    <div class="container">
+        <div class="error-code">404</div>
+        <div class="main-message">Under Construction</div>
+        
+        <div class="apology-text">
+            Good things take time ✨<br>
+            This page is still being crafted...
+        </div>
+
+        <div class="loading-bar">
+            <div class="loading-fill"></div>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="https://jlpagel.github.io/" class="nav-btn">← Back Home</a>
+            <a href="https://jlpagel.github.io/#services" class="nav-btn">Services</a>
+            <a href="https://jlpagel.github.io/#contact" class="nav-btn">Contact</a>
+        </div>
+    </div>
+
+    <!-- Mascot rescue appears after explosion -->
+    <div class="mascot-container" id="mascotRescue">
+        <div class="mascot-placeholder">
+            <!-- Replace YOUR_IMAGE_URL_HERE with the actual URL where you'll host this image -->
+            <img src=""https://jlpagel.github.io/SpeechBubblePhoto.png"" alt="iG3 Mascot" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4rem;\'>🙋‍♀️</div>'">
+        </div>
+        <div class="message-bubble" id="rescueBubble">
+            Don't worry,<br>
+            <span style="font-size: 1.4em;">I GOT YOU!</span>
+            <div class="rescue-text">Taking you home...</div>
+        </div>
+    </div>
+
+    <script>
+        // Self-destruct countdown
+        let timeLeft = 10;
+        const countdownElement = document.getElementById('countdown');
+        const selfDestructElement = document.getElementById('selfDestruct');
+        let userMadeChoice = false;
+
+        // Update countdown every second
+        const countdownInterval = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+
+            // Change color as time runs out
+            if (timeLeft <= 3) {
+                countdownElement.style.color = '#ff0000';
+            } else if (timeLeft <= 5) {
+                countdownElement.style.color = '#ff6b35';
+            }
+
+            // When time runs out
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                if (!userMadeChoice) {
+                    explode();
+                }
+            }
+        }, 1000);
+
+        // Track if user clicks any navigation button
+        const navButtons = document.querySelectorAll('.nav-btn');
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                userMadeChoice = true;
+                clearInterval(countdownInterval);
+                selfDestructElement.style.display = 'none';
+            });
+        });
+
+        // Explosion function
+        function explode() {
+            // Create explosion overlay
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion';
+            document.body.appendChild(explosion);
+
+            // Shake the screen
+            document.body.style.animation = 'none';
+            setTimeout(() => {
+                document.body.style.animation = 'bombShake 0.1s 5';
+            }, 10);
+
+            // After explosion effect (0.8s), show mascot rescue
+            setTimeout(() => {
+                const mascotRescue = document.getElementById('mascotRescue');
+                const rescueBubble = document.getElementById('rescueBubble');
+                
+                mascotRescue.classList.add('rescue');
+                
+                // Show bubble after mascot appears
+                setTimeout(() => {
+                    rescueBubble.classList.add('show');
+                }, 300);
+
+                // Redirect after mascot saves the day
+                setTimeout(() => {
+                    window.location.href = 'https://jlpagel.github.io/';
+                }, 2000);
+            }, 800);
+        }
+    </script>
+</body>
+</html>
